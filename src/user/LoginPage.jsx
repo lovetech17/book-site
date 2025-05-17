@@ -12,12 +12,12 @@ const LoginPage = () => {
                 setForm({
                 ...form,
                 [e.target.name]:e.target.value
-        });
+        })};
 
         const onSubmit = (e) => {
                 e.preventDefault();
                 //로그인 체크
-                if(email===''|| pass==''}{
+                if(email===''|| pass==''){
                         alert =''
 
                 }

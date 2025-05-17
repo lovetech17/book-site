@@ -24,6 +24,13 @@ const HomePage = () => {
 
     useEffect(()=>{callingAPI();},[page]);
 
+   /* 
+   useEffect(()=>{
+        const titleElement =document.getElementsByTagName('title')[0];
+        titleElement.innerHTML ='홈페이지';
+    },[]); 
+    */
+
     const onSubmit = (e) => {
         e.preventDefault();                                 // 폼을 전송 할때, 데이터를 새로 받지 않게
         if(query===''){

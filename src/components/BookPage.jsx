@@ -11,9 +11,9 @@ const BookPage = () => {
 
   return (
     <>
-        <img src = {book.thumbnail||'https://placehold.co/100x150'}
+        <img src = {book.thumbnail||'https://placehold.co/100x150'}/>
       <Button variant="primary" onClick={handleShow}>
-        Launch static backdrop modal
+        상세보기기
       </Button>
 
       <Modal
