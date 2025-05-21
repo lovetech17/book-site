@@ -6,13 +6,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import MainRouter from './MainRouter';
 
+const baseName = process.env.PUBLIC_URL;
 
 const Menubar = () => {
     return (
         <>
             <Navbar expand="lg" bg ='primary' data-bs-theme='dark'>
                 <Container fluid>
-                    <Navbar.Brand href="/">REACT</Navbar.Brand>
+                    <Navbar.Brand href={'${baseName}/'}>REACT</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -20,13 +21,12 @@ const Menubar = () => {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/cart">장바구니</Nav.Link>
+                            <Nav.Link href={'${baseName}/'}>Home</Nav.Link>
+                            <Nav.Link href={'${baseName}/cart>'}>장바구니</Nav.Link>
                         </Nav>
 
                         <Nav>
-                            <Nav.Link href="/login">
-                                로그인
+                            <Nav.Link href={'${baseName}/login'}> 로그인
                             </Nav.Link>
                         </Nav>
                      
