@@ -6,9 +6,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import MainRouter from './MainRouter';
 
-const baseName = process.env.PUBLIC_URL;
-
 const Menubar = () => {
+    const baseName = process.env.PUBLIC_URL;
+
     return (
         <>
             <Navbar expand="lg" bg ='primary' data-bs-theme='dark'>
