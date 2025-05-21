@@ -21,12 +21,12 @@ const Menubar = () => {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href={'${baseName}/'}>Home</Nav.Link>
-                            <Nav.Link href={'${baseName}/cart>'}>장바구니</Nav.Link>
+                            <Nav.Link href={'${baseName}/'}active={pathname==='/'}>Home</Nav.Link>
+                            <Nav.Link href={'${baseName}/cart>'} active={pathname==='/cart'}>장바구니</Nav.Link>
                         </Nav>
 
                         <Nav>
-                            <Nav.Link href={'${baseName}/login'}> 로그인
+                            <Nav.Link href={'${baseName}/login'} active={pathname==='/login'}> 로그인
                             </Nav.Link>
                         </Nav>
                      
