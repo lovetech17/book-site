@@ -22,11 +22,11 @@ const Menubar = () => {
                             navbarScroll
                         >
                             <Nav.Link href={'${baseName}/'}active={pathname==='/'}>Home</Nav.Link>
-                            <Nav.Link href={'${baseName}/cart>'} active={pathname==='/cart'}>장바구니</Nav.Link>
+                            <Nav.Link href={'${baseName}/Cart>'} active={pathname==='/Cart'}>장바구니</Nav.Link>
                         </Nav>
 
                         <Nav>
-                            <Nav.Link href={'${baseName}/login'} active={pathname==='/login'}> 로그인
+                            <Nav.Link href={'${baseName}/Login'} active={pathname==='/Login'}> 로그인
                             </Nav.Link>
                         </Nav>
                      
