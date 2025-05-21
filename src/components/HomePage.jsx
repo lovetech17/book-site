@@ -58,7 +58,7 @@ const HomePage = () => {
                                 <img src={doc.thumbnail} width='100%' />
                             </Card.Body>
                             <Card.Footer>
-                                <div className='text-truncate'>{doc.title}</div>
+                                <div className='text-truncate' alt='책사진'>{doc.title}</div>
                                 <div>{doc.sale_price}원</div>
                             </Card.Footer>
                         </Card>
