@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 
 
 const JoinPage = () => {
+     const basename = process.env.PUBLIC_URL;
   const [form, setForm] = useState({
     email: 'blue@inha.com',
     pass: "12341234",

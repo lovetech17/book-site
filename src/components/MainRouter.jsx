@@ -14,7 +14,7 @@ const MainRouter = () => {
         <Route path='/' element={<HomePage/>}/>
         <Route path='/cart' element={<CartPage />} />
           <Route path='/login' element={<LoginPage/>}/>
-          <Route path="/join" element={<JoinPage />} />
+          <Route path='/join' element={<JoinPage />} />
  
       </Routes>
     </Container>
