@@ -38,10 +38,17 @@ const LoginPage = () => {
                                                 </Card.Header>
                                                 <Card.Body>
                                                            <Form onSubmit={onSubmit}>
-                                                                <Form.Control placeholder='email' value={email}
-                                                                        name='email' onChange={onChange} />
-                                                                <Form.Control placeholder='password' value={pass}
-                                                                        type='password' name='pass' onChange={onChange} />
+                                                                <Form.Control 
+                                                                placeholder='email' 
+                                                                value={email}
+                                                                name='email' 
+                                                                onChange={onChange} />
+                                                                <Form.Control 
+                                                                placeholder='password' 
+                                                                value={pass}
+                                                                type='password' 
+                                                                name='pass' 
+                                                                onChange={onChange} />
                                                                 <Button type="submit" className='w-100'>로그인</Button>
 
                                                         </Form>
