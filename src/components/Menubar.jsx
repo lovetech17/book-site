@@ -29,7 +29,7 @@ const Menubar = () => {
                         </Nav>
 
                         <Nav>
-                            <Nav.Link href={`${baseName}/login`} active={pathname === "/login" && true}>로그인</Nav.Link>
+                            <Nav.Link href={`${baseName}/login`} active={pathname === '/login' && true}>로그인</Nav.Link>
                         </Nav>
                      
                     </Navbar.Collapse>
