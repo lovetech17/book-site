@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Row,Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const BookPage = ({book}) => {
+const BookPage = ({ book }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -11,8 +11,8 @@ const BookPage = ({book}) => {
 
   return (
     <>
-      <img src={book.thumbnail || 'https://placehold.co/100x150'} 
-      width='100%' onClick={handleShow} style={{ 'cursor': 'pointer' }}/>
+      <img src={book.thumbnail || 'https://placehold.co/100x150'}
+        width='100%' onClick={handleShow} style={{ 'cursor': 'pointer' }} />
 
       <Modal
         size='lg'
@@ -27,13 +27,14 @@ const BookPage = ({book}) => {
 
         <Modal.Body>
           <Row>
-            <Col xs={3}> <img src={book.thumbnail || 'https://placehold.co/100x150'}/> </Col>
-                <Col className='align-self-center'>
-               <div>판매가 : {book.sale_price}원</div>
-                            <div>저자 : {book.authors}</div>
-                            <div>출판사 : {book.publisher}</div>
-                            <div>ISBN : {book.isbn}</div>
-                            <div>출판일 : {book.datetime}</div>
+            <Col xs={3}> <img src={book.thumbnail || 'https://placehold.co/100x150'} /> </Col>
+
+            <Col className='align-self-center'>
+              <div>판매가 : {book.sale_price}원</div>
+              <div>저자 : {book.authors}</div>
+              <div>출판사 : {book.publisher}</div>
+              <div>ISBN : {book.isbn}</div>
+              <div>출판일 : {book.datetime}</div>
             </Col>
           </Row>
           <hr />

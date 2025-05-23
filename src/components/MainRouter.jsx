@@ -3,8 +3,8 @@ import { Container } from 'react-bootstrap'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './HomePage'
 import CartPage from './CartPage'
-import LoginPage from '../user/LoginPage'
-import JoinPage from '../user/JoinPage'
+import LoginPage from './user/LoginPage'
+import JoinPage from './user/JoinPage'
 
 
 const MainRouter = () => {
