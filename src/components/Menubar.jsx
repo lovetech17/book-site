@@ -25,11 +25,11 @@ const Menubar = () => {
                             navbarScroll
                         >
                             <Nav.Link href={`${baseName}/`}>Home</Nav.Link>
-                            <Nav.Link href={`${baseName}/cart`} active={pathname==='/cart'} >장바구니</Nav.Link>
+                            <Nav.Link href={`${baseName}/cart`} active={pathname==='/cart'&& true} >장바구니</Nav.Link>
                         </Nav>
 
                         <Nav>
-                            <Nav.Link href={`${baseName}/login`}>로그인</Nav.Link>
+                            <Nav.Link href={`${baseName}/login`} active={pathname === "/login" && true}>로그인</Nav.Link>
                         </Nav>
                      
                     </Navbar.Collapse>
