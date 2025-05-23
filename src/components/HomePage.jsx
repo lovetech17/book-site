@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup, Button, Card } from 'react-bootstrap'
+import BookPage from './BookPage';
 
 const HomePage = () => {
 
@@ -32,12 +33,13 @@ const HomePage = () => {
         if (query === '') {
             alert("검색어를 입력하세요!");
         } else {
+            setPage(1);                                     // 검색을 누르면 1페이지 부터 보이게!
             callingAPI();
         }
     }
     return (
         <div>
-            <h1 className='my-5 text-center'>홈페이지</h1>
+            <h1 className='my-5 text-center'>HOME</h1>
             <Row className='mb-3'>
                 <Col>
                     <Form onSubmit={onSubmit}>
@@ -52,10 +54,10 @@ const HomePage = () => {
             </Row>
             <Row>
                 {document.map(doc =>                       // 받아온 db 문서를 반복해서 출력!
-                    <Col g={2} md={3} xs={6} className='mb-4' key={doc.isbn}>
+                    <Col g={2} md={3} xs={6} className='mb-3' key={doc.isbn}>
                         <Card>
                             <Card.Body>
-                                <img src={doc.thumbnail} width='100%' />
+                                <BookPage book ={doc}/>
                             </Card.Body>
                             <Card.Footer>
                                 <div className='text-truncate' alt='책사진'>{doc.title}</div>

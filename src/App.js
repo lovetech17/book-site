@@ -9,7 +9,7 @@ function App() {
     <div>
       <img src='./home.jpg'alt='상단배경' width = '100%' />
       <Menubar/>
-      <HomePage/>
+    
       <FooterPage/>
   </div>
   );
