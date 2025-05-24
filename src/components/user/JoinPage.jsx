@@ -3,11 +3,16 @@ import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
+import { app } from '../../firebase'
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useNavigate } from "react-router-dom";
 
 
 const JoinPage = () => {
-     const basename = process.env.PUBLIC_URL;
+  const auth = getAuth(app); // 파이어 베이스 인증 
+  const [loading, setLoading] = useState(false);
+  const navi = useNavigate();
+  const basename = process.env.PUBLIC_URL;
   const [form, setForm] = useState({
     email: 'blue@inha.com',
     pass: "12341234",
@@ -27,10 +32,26 @@ const JoinPage = () => {
     if (email === "" || pass === "") {
       alert("input your email or password");
     } else {
-      // join check
+      if (window.confirm('정말로 회원가입할래요?'))
+
+        setLoading(true);
+      createUserWithEmailAndPassword(auth, email, pass)
+        .then(success => {
+          alert('회원가입입성공');
+          setLoading(false);
+          navi('/login');
+        })
+        .catch(error => {
+          setLoading(false);
+          alert('회원가입에러')
+
+        })
+
+
     }
   };
 
+  if (loading) return <h1>로딩중...</h1>
   return (
     <div>
       <Row className="justify-content-center my-5">
