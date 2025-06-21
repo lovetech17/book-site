@@ -11,11 +11,11 @@ import { useNavigate } from "react-router-dom";
 const JoinPage = () => {
   const auth = getAuth(app); // 파이어 베이스 인증 
   const [loading, setLoading] = useState(false);
-  const navi = useNavigate();
+  const navi = useNavigate();  // 회원 가입하면 로그인 페이지로 이동
   const basename = process.env.PUBLIC_URL;
   const [form, setForm] = useState({
     email: 'blue@inha.com',
-    pass: "12341234",
+    pass: '12341234'
   });
 
   const { email, pass } = form;
@@ -37,7 +37,7 @@ const JoinPage = () => {
         setLoading(true);
       createUserWithEmailAndPassword(auth, email, pass)
         .then(success => {
-          alert('회원가입입성공');
+          alert('회원가입성공');
           setLoading(false);
           navi('/login');
         })

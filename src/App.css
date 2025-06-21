@@ -3,3 +3,8 @@
     font-size: 20px;
     color: black;
 }
+.heart {
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+}

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup, Button, Card } from 'react-bootstrap'
 import BookPage from './BookPage';
 import { BsCart2 } from "react-icons/bs";
+import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import { app } from '../firebase';
-import { getDatabase, ref, set, get } from 'firebase/database'
+import { getDatabase, ref, set, get, remove } from 'firebase/database'
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
@@ -49,26 +51,37 @@ const HomePage = () => {
 
 
     const onClickCart = (book) => {
-            if (uid) {
-                get(ref(db, `cart/${uid}/${book.isbn}`))
-                    .then(snapshot => {
-                        if (snapshot.exists()) {
-                            alert('장바구니에 이미 존재함!');
-    
-                        } else {
-                            const date = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
-                            set(ref(db, `cart/${uid}/${book.isbn}`), { ...book,date });
-                            alert('장바구니 추가 성공!');
-                        }
-                    });
-    
-            } else {
-                navi('/login');
-            }
+        if (uid) {
+            get(ref(db, `cart/${uid}/${book.isbn}`))
+                .then(snapshot => {
+                    if (snapshot.exists()) {
+                        alert('장바구니에 이미 존재함!');
+
+                    } else {
+                        const date = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+                        set(ref(db, `cart/${uid}/${book.isbn}`), { ...book, date });
+                        alert('장바구니 추가 성공!');
+                    }
+                });
+
+        } else {
+            navi('/login');
         }
-    
-
-
+    }
+    // 빈 하트 함수
+    const onClickRegHeart = (book) => {
+        if (uid) {
+            set(ref(db, `heart/${uid}/${book.isbn}`), book);
+            alert("좋아요에 추가 되었습니다");
+        } else {
+            navi("/login");
+        }
+    }
+    // 채운 하트 클릭 함수
+    const onClickHeart = (book) =>{
+        remove(ref(db, `heart/${uid}/${book.isbn}`));
+        alert("좋아요가 취소되었습니다.");
+    }
 
     if (loading) <h1 className='text-center my-4'>로딩중!</h1>
 
@@ -93,6 +106,9 @@ const HomePage = () => {
                         <Card>
                             <Card.Body>
                                 <BookPage book={doc} />
+                                <div className="heart text-end">
+                                    <FaHeart onClick={() => onClickHeart(doc)} />
+                                </div>
                             </Card.Body>
                             <Card.Footer>
                                 <div className='text-truncate' alt='책사진'>{doc.title}</div>
