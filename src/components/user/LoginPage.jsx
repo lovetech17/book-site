@@ -3,14 +3,11 @@ import { Button, Card, Col, Form, Row } from 'react-bootstrap'
 import {app} from '../../firebase'
 import { getAuth,signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from "react-router-dom";
-
-
 const LoginPage = () => {
         const auth = getAuth(app); // 파이어 베이스 인증 
         const [loading,setLoading] = useState(false);
-        const navi = useNavigate();
+        const navi = useNavigate();  // 홈페이지로 이동동
         const basename = process.env.PUBLIC_URL;
-
         const [form, setForm] = useState({
                 email: 'blue@inha.com',
                 pass: '12341234'
@@ -39,16 +36,16 @@ const LoginPage = () => {
                                 sessionStorage.setItem('email',email);
                                 sessionStorage.setItem('uid',success.user.uid);
                                 setLoading(false);
-                                navi('/');
+                                navi('/');                     // 로그인 성공하면 루트로 이동
                         })
                         .catch(error=>{
                                 setLoading(false);
-                                alert('회원가입에러')
+                                alert('회원가입에러:' + error.message);
 
                         })
                 }
         }
-        if(loading) return <h1>로딩중...</h1>
+        if(loading) return <h1 className='my-5 text-center'>로딩중....</h1>
         return (
                 <div>
                         <Row className='my-5 justify-content-center'>
@@ -71,7 +68,6 @@ const LoginPage = () => {
                                                                 name='pass' 
                                                                 onChange={onChange} />
                                                                 <Button type="submit" className='w-100'>로그인</Button>
-
                                                         </Form>
                                                         <div><a href={`${basename}/join`}>회원가입</a></div>
                                                 </Card.Body>

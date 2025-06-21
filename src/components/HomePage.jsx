@@ -2,8 +2,17 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup, Button, Card } from 'react-bootstrap'
 import BookPage from './BookPage';
+import { BsCart2 } from "react-icons/bs";
+import { app } from '../firebase';
+import { getDatabase, ref, set, get } from 'firebase/database'
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const HomePage = () => {
+    const db = getDatabase(app);       // 디비 정보 갖고 오기기
+    const [loading, setLoading] = useState(false);
+    const uid = sessionStorage.getItem("uid");
+    const navi = useNavigate();
 
     const [document, setDocument] = useState([]);             // 문서함수
     const [query, setQuery] = useState('리액트');             // 검색함수
@@ -37,6 +46,32 @@ const HomePage = () => {
             callingAPI();
         }
     }
+
+
+    const onClickCart = (book) => {
+            if (uid) {
+                get(ref(db, `cart/${uid}/${book.isbn}`))
+                    .then(snapshot => {
+                        if (snapshot.exists()) {
+                            alert('장바구니에 이미 존재함!');
+    
+                        } else {
+                            const date = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+                            set(ref(db, `cart/${uid}/${book.isbn}`), { ...book,date });
+                            alert('장바구니 추가 성공!');
+                        }
+                    });
+    
+            } else {
+                navi('/login');
+            }
+        }
+    
+
+
+
+    if (loading) <h1 className='text-center my-4'>로딩중!</h1>
+
     return (
         <div>
             <h1 className='my-5 text-center'>HOME</h1>
@@ -57,11 +92,15 @@ const HomePage = () => {
                     <Col g={2} md={3} xs={6} className='mb-3' key={doc.isbn}>
                         <Card>
                             <Card.Body>
-                                <BookPage book ={doc}/>
+                                <BookPage book={doc} />
                             </Card.Body>
                             <Card.Footer>
                                 <div className='text-truncate' alt='책사진'>{doc.title}</div>
-                                <div>{doc.sale_price}원</div>
+
+                                <Row>
+                                    <Col>{doc.sale_price}원</Col>
+                                    <Col className='text-end cart' ><BsCart2 onClick={() => onClickCart(doc)}></BsCart2></Col>
+                                </Row>
                             </Card.Footer>
                         </Card>
                     </Col>
@@ -74,5 +113,6 @@ const HomePage = () => {
             </div>
         </div>
     )
+
 }
 export default HomePage

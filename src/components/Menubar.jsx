@@ -15,15 +15,14 @@ const Menubar = () => {
     const {pathname} = location;
     const baseName = process.env.PUBLIC_URL;
 
-    const onLogout = (e) => {
-        e.preventDefalut();
+    const onLogout = (e) => {                       // 클릭하면 어디론가 가려고 하니 못가게, 프리벤트
+        e.preventDefault();
         if(window.confirm('로그아웃 하실래요?'))
         {
             sessionStorage.clear();
-            navigator('/');
+            navi('/');
         }
     }
-
     return (
         <>
             <Navbar expand="lg" bg ='primary' data-bs-theme='dark'>
@@ -37,16 +36,16 @@ const Menubar = () => {
                             navbarScroll
                         >
                             <Nav.Link href={`${baseName}/`}>Home</Nav.Link>
-                            {email &&
+                            {email &&                               // 이메일이 있을때만, 장바구니를 보여줘줘
                             <Nav.Link href={`${baseName}/cart`} active={pathname==='/cart'&& true} >장바구니</Nav.Link>
                             }
                         </Nav>
 
                         <Nav>
-                            {email ?
+                            {email ?        // 이메일 있으면 -> 로그아웃, 없으면 -> 로그인
                                 <>
-                                <Nav.Link href='#' active>{email}</Nav.Link>
-                                 <Nav.Link href='#'onClick={onLogout}>로그아웃</Nav.Link>
+                                <Nav.Link href={'#'} active={true}>{email}</Nav.Link>   
+                                 <Nav.Link href={'#'} onClick={onLogout}>로그아웃</Nav.Link>
                                 </>
                                 :
                                  <Nav.Link href={`${baseName}/login`} active={pathname === '/login' && true}>로그인</Nav.Link>
