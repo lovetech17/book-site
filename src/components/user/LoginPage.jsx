@@ -11,7 +11,7 @@ const LoginPage = () => {
         const [form, setForm] = useState({
                 email: 'blue@inha.com',
                 pass: '12341234'
-        })
+        });
 
         const { email, pass } = form;
 

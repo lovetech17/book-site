@@ -6,12 +6,13 @@ import { BsCart2 } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { app } from '../firebase';
-import { getDatabase, ref, set, get, remove } from 'firebase/database'
+import { getDatabase, ref, set, get, remove, onValue } from 'firebase/database'
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 const HomePage = () => {
     const db = getDatabase(app);       // 디비 정보 갖고 오기기
+    const [heart, setHeart] = useState([]);
     const [loading, setLoading] = useState(false);
     const uid = sessionStorage.getItem("uid");
     const navi = useNavigate();
@@ -37,7 +38,10 @@ const HomePage = () => {
         setLast(Math.ceil(res.data.meta.pageable_count / 12));
     }
 
-    useEffect(() => { callingAPI(); }, [page]);
+    useEffect(() => { 
+        callingAPI(); 
+        checkHeart();
+    }, [page]);
 
     const onSubmit = (e) => {
         e.preventDefault();                                 // 폼을 전송 할때, 데이터를 새로 받지 않게
@@ -78,10 +82,26 @@ const HomePage = () => {
         }
     }
     // 채운 하트 클릭 함수
-    const onClickHeart = (book) =>{
+    const onClickHeart = (book) => {
         remove(ref(db, `heart/${uid}/${book.isbn}`));
         alert("좋아요가 취소되었습니다.");
     }
+    // 현재 이메일의 좋아요 목록 
+    const checkHeart = () => {
+        setLoading(true);
+        onValue(ref(db, `heart/${uid}`), snapshot => {
+            const rows = [];
+            snapshot.forEach(
+                row => {
+                    rows.push(row.val().isbn);
+                }
+            );
+            setHeart(rows);
+            setLoading(false);
+        })
+    }
+
+  
 
     if (loading) <h1 className='text-center my-4'>로딩중!</h1>
 
@@ -107,7 +127,7 @@ const HomePage = () => {
                             <Card.Body>
                                 <BookPage book={doc} />
                                 <div className="heart text-end">
-                                    <FaHeart onClick={() => onClickHeart(doc)} />
+                                    {heart.includes(doc.isbn) ? <FaHeart onClick={() => onClickHeart(doc)} /> : <FaRegHeart onClick={() => onClickRegHeart(doc)} />}
                                 </div>
                             </Card.Body>
                             <Card.Footer>
